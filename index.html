@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautify JSON</title>
+    <style>
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        #output {
+            white-space: pre-wrap;
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter JSON to Beautify</h2>
+    <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
+    <button onclick="beautifyJson()">Beautify JSON</button>
+
+    <h3>Beautified Output:</h3>
+    <button id="copyButton" onclick="copyToClipboard()" style="margin-bottom: 30px;">Copy to Clipboard</button>
+    <div id="output">
+        <pre id="jsonOutput"></pre>
+    </div>
+
+    <script>
+        function beautifyJson() {
+            const input = document.getElementById("jsonInput").value;
+
+            try {
+                let log = JSON.parse(input)
+                i = log.message.indexOf(" ")
+                obj = JSON.parse(log.message.slice(i))
+                output = JSON.stringify(obj, undefined, 4)
+                // Display the formatted JSON
+                document.getElementById("jsonOutput").textContent = output;
+            } catch (error) {
+                document.getElementById("jsonOutput").textContent = "Invalid JSON format!";
+            }
+        }
+        function copyToClipboard() {
+            const outputText = document.getElementById("jsonOutput").textContent;
+            navigator.clipboard.writeText(outputText)
+                .then(() => {
+                    alert("Copied to clipboard!");
+                })
+                .catch(err => {
+                    alert("Failed to copy: ", err);
+                });
+        }
+    </script>
+</body>
+</html>
