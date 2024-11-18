@@ -45,6 +45,7 @@
                 } else {
                     i = log.Message.indexOf(" ")
                     obj = JSON.parse(log.Message.slice(i))
+                    obj = obj[0]
                 }
                 output = JSON.stringify(obj, undefined, 4)
                 // Display the formatted JSON
