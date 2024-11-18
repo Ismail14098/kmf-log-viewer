@@ -38,8 +38,14 @@
 
             try {
                 let log = JSON.parse(input)
-                i = log.message.indexOf(" ")
-                obj = JSON.parse(log.message.slice(i))
+                obj = null
+                if (log.message != null) {
+                    i = log.message.indexOf(" ")
+                    obj = JSON.parse(log.message.slice(i))
+                } else {
+                    i = log.Message.indexOf(" ")
+                    obj = JSON.parse(log.Message.slice(i))
+                }
                 output = JSON.stringify(obj, undefined, 4)
                 // Display the formatted JSON
                 document.getElementById("jsonOutput").textContent = output;
